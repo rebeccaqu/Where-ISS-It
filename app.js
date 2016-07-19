@@ -4,7 +4,6 @@ app.getUserLocation = function() {
   navigator.geolocation.getCurrentPosition(function(position) {
     app.userLat = position.coords.latitude;
     app.userLng = position.coords.longitude;
-    // app.userAlt = position.coords.altitude;
 
     app.getPassTime(app.userLat, app.userLng);
   });
@@ -17,7 +16,10 @@ app.getISSLocation = function() {
     dataType: 'jsonp',
     success: function(payload) {
       console.info('GETTING LOCATION 📍');
-      console.log(payload);
+      var lat = payload.iss_position.latitude;
+      var lng = payload.iss_position.longitude;
+      app.tracker.loadMap(lat, lng);
+      app.tracker.loadMarkers(lat, lng);
     }
   });
 }
@@ -56,4 +58,5 @@ app.getPassTime = function(lat, lng) {
 
 $(function() {
   app.getUserLocation();
+  app.getISSLocation();
 });
