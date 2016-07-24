@@ -1,31 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>IS IT HUURRR?!</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-    }
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>🚀 WHERE ISS IT 🚀</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body>
+		<style>
+			.map {
+				width:100%;
+				height:500px;
+			}
+		</style>
 
-    .map {
-      width:1200px;
-      height:700px;
-    }
-  </style>
+		<div id="wrapper">
+			<header id="header">
+				<h1>W h e r e <strong>&nbsp; <u>I</u> <u>S</u> <u>S</u> &nbsp;</strong> i t ??</h1>
+				<p>The <strong><u>I</u></strong>nternational <strong><u>S</u></strong>pace <strong><u>S</u></strong>tation is moving at close to 28,000 km/h so its location changes really fast!
+				</br>Where is it right now?</p>
+			</header>
 
-  <div class="map"></div>  
+			<div id="main">
+				<section id="content" class="main">
+					<span class="image main">
+						<div class="map"></div>
+					</span>
+					<h2>When will the International Space Station pass over me?</h2>
+					<p>July 30, 2016 5:15AM</p>
+					<p>July 30, 2016 5:15AM</p>
+					<p>July 30, 2016 5:15AM</p>
+					<p>July 30, 2016 5:15AM</p>
+					<p>July 30, 2016 5:15AM</p>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLvhK4NObUq_4yrQIKcfBuezXjaVQ-YGM"></script>
+					<h2>Who is in space right now?</h2>
+					<p>adfaisduhfoaisudfh</p>
+					<p>adfaisduhfoaisudfh</p>
+					<p>adfaisduhfoaisudfh</p>
+					<p>adfaisduhfoaisudfh</p>
+					<p>adfaisduhfoaisudfh</p>
+					<p>adfaisduhfoaisudfh</p>
+				</section>
+			</div>
 
-  <script src="app.js"></script>
-  <script src="helpers.js"></script>
-  <script src="tracker.js"></script>
-</body>
+			<footer id="footer">
+				<p class="copyright">WHEREISSIT&copy; Made with &hearts; in TO. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+			</footer>
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+	  <script>
+	    var config = {
+	      apiKey: app.config.firebaseAPIKEY,
+	      authDomain: app.config.firebaseAuthDomain,
+	      databaseURL: app.config.firebaseDatabaseURL,
+	      storageBucket: app.config.firebaseStorageBucket,
+	    };
+
+	    // var config = {
+	    //   apiKey: "AIzaSyCdYMYqUhZOj_3O75Amfh70m5xvgg6kGPs",
+	    //   authDomain: "iss-finder-bd8c8.firebaseapp.com",
+	    //   databaseURL: "https://iss-finder-bd8c8.firebaseio.com",
+	    //   storageBucket: "iss-finder-bd8c8.appspot.com",
+	    // };
+
+	    firebase.initializeApp(config);
+
+	    var database = firebase.database();
+	    var issPath = database.ref('/issPath');
+	  </script>
+
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLvhK4NObUq_4yrQIKcfBuezXjaVQ-YGM"></script>
+
+	  <script src="app.js"></script>
+	  <script src="helpers.js"></script>
+	  <script src="tracker.js"></script>
+
+	</body>
 </html>
