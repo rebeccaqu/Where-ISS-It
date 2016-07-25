@@ -2,7 +2,7 @@ var app = window.app || {};
 
 app.helpers = {};
 
-app.helpers.convertTimestamp = function(timestamp)  {
+app.helpers.convertTimestamp = function(timestamp) {
   var d = new Date(timestamp * 1000),
     yyyy = d.getFullYear(),
     mm = ('0' + (d.getMonth() + 1)).slice(-2),
@@ -26,4 +26,9 @@ app.helpers.convertTimestamp = function(timestamp)  {
   time = yyyy + '-' + mm + '-' + dd + ', ' + h + ':' + min + ' ' + ampm;
 
   return time;
+}
+
+app.helpers.convertSecondsToMinutes = function(seconds) {
+  var minutes = Math.floor(seconds / 60);
+  return minutes;
 }

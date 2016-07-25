@@ -66,11 +66,11 @@ app.getUserLocation = function() {
     app.userLat = position.coords.latitude;
     app.userLng = position.coords.longitude;
 
-    app.getPassTime(app.userLat, app.userLng);
+    app.getPassTimes(app.userLat, app.userLng);
   });
 }
 
-app.getPassTime = function(lat, lng) {
+app.getPassTimes = function(lat, lng) {
   $.ajax({
     url: app.api.ISSPasstimes,
     type: 'GET',
@@ -83,11 +83,17 @@ app.getPassTime = function(lat, lng) {
     dataType: 'jsonp',
     success: function(payload) {
       console.info('GETTING PASS TIMES 🌍🌏🌎🚀');
-      payload.response.map(function(passtime) {
-        console.log(app.helpers.convertTimestamp(passtime.risetime));
-      });
+      app.displayPassTimes(payload.response);
     }
   });
+}
+
+app.displayPassTimes = function(risetimes) {
+  var passtimesHTML = risetimes.map(function(risetime) {
+    var list = `<p>${app.helpers.convertTimestamp(risetime.risetime)} for ${app.helpers.convertSecondsToMinutes(risetime.duration)}min</p>`;
+    return list;
+  });
+  $('.pass-times').html(passtimesHTML);
 }
 
 app.getSpacePeople = function() {
@@ -97,9 +103,17 @@ app.getSpacePeople = function() {
     dataType: 'jsonp',
     success: function(payload) {
       console.info('GETTING SPACE PEEPS 👽👽👽');
-      console.log(payload);
+      app.displaySpacePeople(payload.people);
     }
   });
+}
+
+app.displaySpacePeople = function(people) {
+  var spacePeopleHTML = people.map(function(person) {
+    var list = `<p>${person.name}</p>`;
+    return list;
+  });
+  $('.space-people').html(spacePeopleHTML);
 }
 
 $(function() {
@@ -107,7 +121,7 @@ $(function() {
   window.setInterval(app.updateISSLocation, 3000);
   // app.saveISSLocationToDatabase();
 
-  // app.getUserLocation();
-  // app.getPassTime();
-  // app.getSpacePeople();
+  app.getUserLocation();
+  app.getPassTimes();
+  app.getSpacePeople();
 });
