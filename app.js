@@ -27,7 +27,7 @@ app.updateISSLocation = function() {
     type: 'GET',
     dataType: 'jsonp',
     success: function(payload) {
-      console.info('UPDATING ISS LOCATION 📍');
+      console.info('UPDATING ISS LOCATION 📍🔄');
       app.lat = payload.iss_position.latitude;
       app.lng = payload.iss_position.longitude;
       app.tracker.updateMap(app.lat, app.lng);
@@ -42,7 +42,6 @@ app.saveISSLocationToDatabase = function() {
     type: 'GET',
     dataType: 'jsonp',
     success: function(payload) {
-      console.info('GETTING ISS LOCATION TO SAVE TO DATABASE 📍💾');
       app.lat = payload.iss_position.latitude;
       app.lng = payload.iss_position.longitude;
     }
@@ -50,22 +49,16 @@ app.saveISSLocationToDatabase = function() {
 
   $.when(getLocation).done(function(lat, lng) {
     console.info('SAVING ISS LOCATION TO DATABASE 💾');
-
-    var currentLocation = {
-      lat: lat,
-      lng: lng,
-    }
-
+    var currentLocation = { lat: lat, lng: lng }
     issPath.push(currentLocation);
   });
 }
 
 app.getUserLocation = function() {
-  console.info('GETTING USER LOCATION 🙋🏻');
+  console.info('GETTING USER LOCATION 🙋🏻📍');
   navigator.geolocation.getCurrentPosition(function(position) {
     app.userLat = position.coords.latitude;
     app.userLng = position.coords.longitude;
-
     app.getPassTimes(app.userLat, app.userLng);
   });
 }
@@ -90,7 +83,12 @@ app.getPassTimes = function(lat, lng) {
 
 app.displayPassTimes = function(risetimes) {
   var passtimesHTML = risetimes.map(function(risetime) {
-    var list = `<p>${app.helpers.convertTimestamp(risetime.risetime)} for ${app.helpers.convertSecondsToMinutes(risetime.duration)}min</p>`;
+    var list = `
+      <p>
+        ${app.helpers.convertTimestamp(risetime.risetime)} for
+        ${app.helpers.convertSecondsToMinutes(risetime.duration)}min
+      </p>
+    `;
     return list;
   });
   $('.pass-times').html(passtimesHTML);
@@ -119,8 +117,7 @@ app.displaySpacePeople = function(people) {
 $(function() {
   app.getISSLocation();
   window.setInterval(app.updateISSLocation, 3000);
-  // app.saveISSLocationToDatabase();
-
+  app.saveISSLocationToDatabase();
   app.getUserLocation();
   app.getPassTimes();
   app.getSpacePeople();
